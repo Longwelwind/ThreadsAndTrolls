@@ -1,0 +1,11 @@
+{
+    "require": {
+        "doctrine/orm": "*",
+        "klein/klein": "~2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThreadsAndTrolls\\": "src/"
+        }
+    }
+}

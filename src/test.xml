@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Bayonetta: questions technique pour noob - Le Salon</title>
+        <link>http://forums.jeuxonline.info/showthread.php?t=1287087</link>
+        <description>Bonjour,    Après quelques jours de recherche infructueuses, je me dis que tout le monde est très doué et que je suis nul, aussi je viens chercher un peu d'aide spécifiquement. J'aurais plusieurs questions à poser mais je vais commencer par celles-ci:     (...)</description>
+        <language>fr</language>
+        <pubDate>Wed, 31 Dec 2014 17:40:12 +0100</pubDate>
+        <lastBuildDate>Wed, 31 Dec 2014 17:40:12 +0100</lastBuildDate>
+        <generator>JOL::Flux 1.0</generator>
+        <copyright>Copyright 2015 JeuxOnLine. Tous droits réservés</copyright>
+        <item>
+            <title>Bayonetta: questions technique pour noob</title>
+            <link>http://forums.jeuxonline.info/showthread.php?p=27954160#27954164</link>
+            <description>testStat@joueur1,dex,10,2d6 monsterAttack@1,joueur1 Si le jeu passe à un format B2P, y'auras pas de modification majeure d'un point de vue API ou gameplay. (...)</description>
+            <pubDate>Mon, 29 Dec 2014 18:41:57 +0100</pubDate>
+            <guid>http://forums.jeuxonline.info/showthread.php?p=27954160#27954160</guid>
+            <category>Bayonetta: questions technique pour noob - Le Salon</category>
+            <author>MsPtibiscuit</author>
+        </item>
+        <item>
+            <title>Bayonetta: questions technique pour noob</title>
+            <link>http://forums.jeuxonline.info/showthread.php?p=27954163#27954163</link>
+            <description>assignStats@dex=3,str=6 attack@1 Si le jeu passe à un format B2P, majeure d'un point de vue API ou gameplay. (...)</description>
+            <pubDate>Mon, 29 Dec 2014 18:41:57 +0100</pubDate>
+            <guid>http://forums.jeuxonline.info/showthread.php?p=27954160#27954160</guid>
+            <category>Bayonetta: questions technique pour noob - Le Salon</category>
+            <author>Player1</author>
+        </item>
+        <item>
+            <title>Bayonetta: questions technique pour noob</title>
+            <link>http://forums.jeuxonline.info/showthread.php?p=27954160#27954162</link>
+            <description>experience@joueur1,225  Si le jeu passe à un format B2P, y'auras pas de modification majeure d'un point de vue API ou gameplay. (...)</description>
+            <pubDate>Mon, 29 Dec 2014 18:41:57 +0100</pubDate>
+            <guid>http://forums.jeuxonline.info/showthread.php?p=27954160#27954160</guid>
+            <category>Bayonetta: questions technique pour noob - Le Salon</category>
+            <author>MsPtibiscuit</author>
+        </item>
+        <item>
+            <title>Bayonetta: questions technique pour noob</title>
+            <link>http://forums.jeuxonline.info/showthread.php?p=27954160#27954161</link>
+            <description>createCharacter@Joueur1,dwarf,clerc join@ attack@1  Si le jeu passe à un format B2P, majeure d'un point de vue API ou gameplay. (...)</description>
+            <pubDate>Mon, 29 Dec 2014 18:41:57 +0100</pubDate>
+            <guid>http://forums.jeuxonline.info/showthread.php?p=27954160#27954160</guid>
+            <category>Bayonetta: questions technique pour noob - Le Salon</category>
+            <author>Player1</author>
+        </item>
+        <item>
+            <title>Bayonetta: questions technique pour noob</title>
+            <link>http://forums.jeuxonline.info/showthread.php?p=27954160#27954160</link>
+            <description>adventure@ spawn@1  Si le jeu passe à un format B2P, y'auras pas de modification majeure d'un point de vue API ou gameplay. (...)</description>
+            <pubDate>Mon, 29 Dec 2014 18:41:57 +0100</pubDate>
+            <guid>http://forums.jeuxonline.info/showthread.php?p=27954160#27954160</guid>
+            <category>Bayonetta: questions technique pour noob - Le Salon</category>
+            <author>MsPtibiscuit</author>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,157 @@
+/**
+ * Some of the styling is taken from http://dragonslayer.eu01.aws.af.cm/#t_rules
+ */
+
+body {
+    background-color: #F7F7F7;
+}
+
+small {
+    font-weight: 300 !important;
+}
+
+.no-style {
+    text-decoration: none;
+    color: inherit;
+}
+
+.no-style:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+#menu {
+    background-color: white;
+    border: 1px grey solid;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+#container {
+    width: 1024px;
+}
+
+.panel {
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.panel-character {
+    color: #1E5B98;
+    border: 1px solid #1E5B98;
+    background: rgba(15, 117, 218, 0.25);
+    text-align: center;
+}
+
+.panel-monster {
+    color: #891E1E;
+    border: 1px solid #891E1E;
+    background: rgba(201, 17, 17, 0.25);
+    text-align: center;
+}
+
+/**
+ * Progress bars
+ */
+.progress-bar {
+    height: 16px;
+    width: 100%;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+
+    font-size: 12px;
+}
+
+.progress-bar .progress-filled {
+    height: 100%;
+    float: left;
+    position: absolute;
+}
+
+.progress-filled.red {
+    background-color: #D9534F;
+}
+
+.progress-filled.green {
+    background-color: #5CB85C;
+}
+
+.progress-bar span {
+    z-index: 10;
+}
+
+/**
+ * Table rows color
+ */
+.tr-green {
+    background-color: rgba(74, 155, 23, 0.25);
+}
+
+.tr-red {
+    background-color: rgba(201, 17, 17, 0.25);
+}
+
+.tr-orange {
+    background-color: rgba(255, 156, 0, 0.25);
+}
+
+.tr-blue {
+    background-color: rgba(15, 117, 218, 0.25);
+}
+
+/**
+ * Icons
+ */
+
+.icon {
+    background-image: url("./img/items.png");
+    background-repeat:  no-repeat;
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+}
+
+.icon-soldier {
+    background-position: calc(-2 * 34px) calc(-5 * 34px);
+}
+
+.icon-gobelin {
+    background-position: calc(-1 * 34px) calc(-9 * 34px);
+}
+
+.icon-join {
+    background-position: calc(-4 * 34px) calc(-26 * 34px);
+}
+
+.icon-monster-spawn {
+    background-position: calc(-5 * 34px) calc(-16 * 34px);
+}
+
+.icon-character-attack {
+    background-position: calc(-6 * 34px) calc(-25 * 34px);
+}
+
+.icon-level-up {
+    background-position: calc(-0 * 34px) calc(-26 * 34px);
+}
+
+.icon-statistic-test {
+    background-position: calc(-7 * 34px) calc(-24 * 34px);
+}
+
+
+.icon-warrior {
+    background-position: calc(-4 * 34px) calc(-5 * 34px);
+}
+.icon-clerc {
+    background-position: calc(-11 * 34px) calc(-9 * 34px);
+}
+.icon-wizard {
+    background-position: calc(-7 * 34px) calc(-9 * 34px);
+}
+.icon-rogue {
+    background-position: calc(-2 * 34px) calc(-6 * 34px);
+}
