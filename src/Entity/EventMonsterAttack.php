@@ -36,7 +36,7 @@ class EventMonsterAttack extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/monsterattack.php");
+        include(__DIR__ . "/../../views/event/monster_attack.php");
     }
 
     public static function createMonsterAttack(Adventure $adventure, Monster $monster, AdventureCharacter $advCharacter, $damage)

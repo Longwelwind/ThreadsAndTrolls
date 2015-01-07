@@ -31,7 +31,7 @@ class EventCharacterCastSpell extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/charactercastspell.php");
+        include(__DIR__ . "/../../views/event/character_cast_spell.php");
     }
 
     public static function createEventCharacterCastSpell($adventure, $adventureCharacter, $spell) {

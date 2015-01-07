@@ -35,7 +35,7 @@ class EventCharacterAttack extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/characterattack.php");
+        include(__DIR__ . "/../../views/event/character_attack.php");
     }
 
     public static function createCharacterAttack(Adventure $adventure, AdventureCharacter $adventureCharacter, Monster $monster, $damage)

@@ -41,7 +41,7 @@ class EventRewardExperience extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/rewardexperience.php");
+        include(__DIR__ . "/../../views/event/reward_experience.php");
     }
 
     /**

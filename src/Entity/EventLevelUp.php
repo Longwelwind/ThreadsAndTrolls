@@ -41,7 +41,7 @@ class EventLevelUp extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/levelup.php");
+        include(__DIR__ . "/../../views/event/level_up.php");
     }
 
     /**

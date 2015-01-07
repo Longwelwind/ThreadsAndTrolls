@@ -76,7 +76,7 @@ class EventStatisticTest extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/statistictest.php");
+        include(__DIR__ . "/../../views/event/statistic_test.php");
     }
 
     public function isSuccessful() {

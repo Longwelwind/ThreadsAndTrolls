@@ -24,7 +24,7 @@ class EventMonsterSpawn extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/monsterspawn.php");
+        include(__DIR__ . "/../../views/event/monster_spawn.php");
     }
 
     public static function createMonsterSpawn(Adventure $adventure, Monster $monster)
