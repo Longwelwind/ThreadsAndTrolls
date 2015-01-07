@@ -2,13 +2,14 @@
 
 
 namespace ThreadsAndTrolls\Entity;
+
 use ThreadsAndTrolls\Database;
 
 /**
  * @Entity
- * @Table(name="event_character_attack")
+ * @Table(name="event_character_inflict_damage")
  */
-class EventCharacterAttack extends Event {
+class EventCharacterInflictDamage extends Event {
     /**
      * @OneToOne(targetEntity="Monster")
      */
@@ -20,21 +21,27 @@ class EventCharacterAttack extends Event {
      */
     private $adventureCharacter;
 
-    public function __construct($adventure, $adventureCharacter, $monster)
+    /**
+     * @Column(type="integer")
+     */
+    private $damage;
+
+    public function __construct($adventure, $adventureCharacter, $monster, $damage)
     {
         parent::__construct($adventure);
         $this->adventureCharacter = $adventureCharacter;
         $this->monster = $monster;
+        $this->damage = $damage;
     }
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/character_attack.php");
+        include(__DIR__ . "/../../views/event/character_inflict_damage.php");
     }
 
-    public static function createEventCharacterAttack(Adventure $adventure, AdventureCharacter $adventureCharacter, Monster $monster)
+    public static function createEventCharacterInflictDamage(Adventure $adventure, AdventureCharacter $adventureCharacter, Monster $monster, $damage)
     {
-        $event = new EventCharacterAttack($adventure, $adventureCharacter, $monster);
+        $event = new EventCharacterInflictDamage($adventure, $adventureCharacter, $monster, $damage);
 
         $adventure->getEvents()->add($event);
 
@@ -58,4 +65,13 @@ class EventCharacterAttack extends Event {
     {
         return $this->adventureCharacter;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDamage()
+    {
+        return $this->damage;
+    }
+
 } 

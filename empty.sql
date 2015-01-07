@@ -5,6 +5,7 @@ TRUNCATE TABLE `event_join`;
 TRUNCATE TABLE `event_monster_spawn`;
 TRUNCATE TABLE `event_character_attack`;
 TRUNCATE TABLE `event_character_use_ability`;
+TRUNCATE TABLE `event_character_inflict_damage`;
 TRUNCATE TABLE `event_level_up`;
 TRUNCATE TABLE `event_reward_experience`;
 TRUNCATE TABLE `monster`;

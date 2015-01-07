@@ -36,12 +36,13 @@ class AdventureCharacter extends LivingEntity {
 
     public function inflictDamage($target, $damage, $damageType = 0) {
         $target->damage($damage);
-        EventCharacterAttack::createCharacterAttack($this->getAdventure(), $this, $target, $damage);
+        EventCharacterInflictDamage::createEventCharacterInflictDamage($this->getAdventure(), $this, $target, $damage);
     }
 
     public function attack($target) {
         $damage = $this->getAttackDamage();
 
+        EventCharacterAttack::createEventCharacterAttack($this->getAdventure(), $this, $target);
         $this->inflictDamage($target, $damage);
 
         return $damage;

@@ -142,6 +142,10 @@ small {
     background-position: calc(-7 * 34px) calc(-24 * 34px);
 }
 
+.icon-inflict-damage {
+    background-position: calc(-7 * 34px) calc(-22 * 34px);
+}
+
 
 .icon-warrior {
     background-position: calc(-4 * 34px) calc(-5 * 34px);
