@@ -6,7 +6,7 @@ namespace ThreadsAndTrolls\Entity;
 /**
  * @Entity
  */
-class SpellFireball extends Spell {
+class AbilityFireball extends Ability {
 
     public function onCast(Adventure $adventure, AdventureCharacter $caster, $arguments)
     {
@@ -22,7 +22,7 @@ class SpellFireball extends Spell {
     }
 
 
-    public function processArguments(Adventure $adventure, AdventureCharacter $caster, $argumentsRaw)
+    public function processArguments(Adventure $adventure, AdventureCharacter $user, $argumentsRaw)
     {
         if (count($argumentsRaw) != 1)
             return false;

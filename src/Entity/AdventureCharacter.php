@@ -47,10 +47,10 @@ class AdventureCharacter extends LivingEntity {
         return $damage;
     }
 
-    public function castSpell(Spell $spell, $arguments)
+    public function useAbility(Ability $ability, $arguments)
     {
-        EventCharacterCastSpell::createEventCharacterCastSpell($this->getAdventure(), $this, $spell);
-        $spell->onCast($this->getAdventure(), $this, $arguments);
+        EventCharacterUseAbility::createEventCharacterUseAbility($this->getAdventure(), $this, $ability);
+        $ability->onCast($this->getAdventure(), $this, $arguments);
     }
 
     public function testStatistic(Statistic $statisticToCheck, DiceRoll $diceRoll, $requiredAmount) {

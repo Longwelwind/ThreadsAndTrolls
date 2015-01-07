@@ -6,14 +6,14 @@ use ThreadsAndTrolls\Database;
 
 /**
  * @Entity
- * @Table(name="event_character_cast_spell")
+ * @Table(name="event_character_use_ability")
  */
-class EventCharacterCastSpell extends Event {
+class EventCharacterUseAbility extends Event {
 
     /**
-     * @OneToOne(targetEntity="Spell")
+     * @OneToOne(targetEntity="Ability")
      */
-    private $spell;
+    private $ability;
 
     /**
      * @OneToOne(targetEntity="AdventureCharacter")
@@ -21,22 +21,22 @@ class EventCharacterCastSpell extends Event {
      */
     private $adventureCharacter;
 
-    function __construct($adventure, $adventureCharacter, $spell)
+    function __construct($adventure, $adventureCharacter, $ability)
     {
         parent::__construct($adventure);
         $this->adventureCharacter = $adventureCharacter;
-        $this->spell = $spell;
+        $this->ability = $ability;
     }
 
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/character_cast_spell.php");
+        include(__DIR__ . "/../../views/event/character_use_ability.php");
     }
 
-    public static function createEventCharacterCastSpell($adventure, $adventureCharacter, $spell) {
+    public static function createEventCharacterUseAbility($adventure, $adventureCharacter, $ability) {
 
-        $event = new EventCharacterCastSpell($adventure, $adventureCharacter, $spell);
+        $event = new EventCharacterUseAbility($adventure, $adventureCharacter, $ability);
 
         $adventure->getEvents()->add($event);
 
@@ -57,9 +57,9 @@ class EventCharacterCastSpell extends Event {
     /**
      * @return mixed
      */
-    public function getSpell()
+    public function getAbility()
     {
-        return $this->spell;
+        return $this->ability;
     }
 
 

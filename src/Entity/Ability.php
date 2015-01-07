@@ -6,11 +6,11 @@ use ThreadsAndTrolls\Database;
 
 /**
  * @Entity
- * @Table(name="spell")
+ * @Table(name="ability")
  * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="spell_type", type="string")
+ * @DiscriminatorColumn(name="ability_class", type="string")
  */
-abstract class Spell {
+abstract class Ability {
 
     /**
      * @Id
@@ -40,8 +40,8 @@ abstract class Spell {
 
     abstract public function getDescription(AdventureCharacter $adventureCharacter);
 
-    public static function getSpellByTag($tag) {
-        return Database::getRepository("ThreadsAndTrolls\\Entity\\Spell")
+    public static function getAbilityByTag($tag) {
+        return Database::getRepository("ThreadsAndTrolls\\Entity\\Ability")
             ->findOneBy(array("tag" => $tag));
     }
 
