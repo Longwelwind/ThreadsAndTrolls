@@ -155,3 +155,7 @@ small {
 .icon-rogue {
     background-position: calc(-2 * 34px) calc(-6 * 34px);
 }
+
+.icon-fireball {
+    background-position: calc(-2 * 34px) calc(-20 * 34px);
+}
