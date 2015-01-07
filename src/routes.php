@@ -15,6 +15,7 @@ use ThreadsAndTrolls\Entity\Monster;
 use ThreadsAndTrolls\Entity\MonsterModel;
 use ThreadsAndTrolls\Entity\Profession;
 use ThreadsAndTrolls\Entity\Race;
+use ThreadsAndTrolls\Entity\Spell;
 use ThreadsAndTrolls\Entity\Statistic;
 
 $klein->respond('GET', '/', function($request) {
@@ -210,7 +211,20 @@ function processAction(Adventure $adventure, $user, $action) {
 
                     if ($monster != null) {
                         $damage = $adventureCharacter->attack($monster);
-                        EventCharacterAttack::createCharacterAttack($adventure, $adventureCharacter, $monster, $damage);
+                    }
+
+                } else if ($actionName == "castspell") {
+
+                    $spell = Spell::getSpellByTag($actionArgs[0]);
+                    if ($spell != null) {
+
+                        $argumentsRaw = array_slice($actionArgs, 1);
+                        // We check if the arguments given by the user are good (good nicknames, ...)
+                        $arguments = $spell->processArguments($adventure, $adventureCharacter, $argumentsRaw);
+
+                        if ($arguments !== false) {
+                            $adventureCharacter->castSpell($spell, $arguments);
+                        }
                     }
 
                 }

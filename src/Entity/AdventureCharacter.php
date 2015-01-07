@@ -34,12 +34,23 @@ class AdventureCharacter extends LivingEntity {
         $this->health = $health;
     }
 
+    public function inflictDamage($target, $damage, $damageType = 0) {
+        $target->damage($damage);
+        EventCharacterAttack::createCharacterAttack($this->getAdventure(), $this, $target, $damage);
+    }
+
     public function attack($target) {
         $damage = $this->getAttackDamage();
 
-        $target->damage($damage);
+        $this->inflictDamage($target, $damage);
 
         return $damage;
+    }
+
+    public function castSpell(Spell $spell, $arguments)
+    {
+        EventCharacterCastSpell::createEventCharacterCastSpell($this->getAdventure(), $this, $spell);
+        $spell->onCast($this->getAdventure(), $this, $arguments);
     }
 
     public function testStatistic(Statistic $statisticToCheck, DiceRoll $diceRoll, $requiredAmount) {
