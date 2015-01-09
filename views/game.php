@@ -47,7 +47,7 @@
             <div class="panel panel-monster">
                 <div class="icon icon-gobelin push-center"></div>
                 <div>
-                    <b><?= $monster->getName(); ?></b>
+                    <b><?= $monster->getName(); ?></b> <small>(<?= $monster->getId(); ?>)</small>
                 </div>
                 <div class="push-center">
                     <?= $monster->getHealth(); ?>/<?=$monster->getMaxHealth(); ?>
