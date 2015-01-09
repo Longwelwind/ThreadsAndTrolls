@@ -12,40 +12,14 @@ use ThreadsAndTrolls\DiceRoll;
 class AdventureCharacter extends LivingEntity {
 
     /**
-     * @Column(type="integer")
-     * @Id
-     * @GeneratedValue
-     */
-    private $id;
-
-    /**
-     * @ManyToOne(targetEntity="Adventure", inversedBy="characters")
-     */
-    private $adventure;
-
-    /**
      * @OneToOne(targetEntity="Character")
      */
     private $character;
 
     public function __construct($character, $adventure, $health) {
-        $this->adventure = $adventure;
+        parent::__construct($adventure, $health);
+
         $this->character = $character;
-        $this->health = $health;
-    }
-
-    public function inflictDamage($target, $damage, $damageType = 0) {
-        $target->damage($damage);
-        EventCharacterInflictDamage::createEventCharacterInflictDamage($this->getAdventure(), $this, $target, $damage);
-    }
-
-    public function attack($target) {
-        $damage = $this->getAttackDamage();
-
-        EventCharacterAttack::createEventCharacterAttack($this->getAdventure(), $this, $target);
-        $this->inflictDamage($target, $damage);
-
-        return $damage;
     }
 
     public function useAbility(Ability $ability, $arguments)
@@ -103,24 +77,7 @@ class AdventureCharacter extends LivingEntity {
         return $this->character;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function getMaxHealth() {
         return $this->getCharacter()->getMaxHealth();
     }
-
-    /**
-     * @return mixed
-     */
-    public function getAdventure()
-    {
-        return $this->adventure;
-    }
-
 } 

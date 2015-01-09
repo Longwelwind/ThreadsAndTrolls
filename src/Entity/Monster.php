@@ -11,36 +11,22 @@ use ThreadsAndTrolls\Database;
 class Monster extends LivingEntity {
 
     /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     */
-    private $id;
-
-    /**
      * @OneToOne(targetEntity="MonsterModel")
      * @JoinColumn(name="monster_model_id", referencedColumnName="id")
      */
     private $monsterModel;
 
-    /**
-     * @ManyToOne(targetEntity="Adventure", inversedBy="monsters")
-     */
-    private $adventure;
-
     public function __construct(MonsterModel $monsterModel, Adventure $adventure, $health) {
+        parent::__construct($adventure, $health);
+
         $this->monsterModel = $monsterModel;
-        $this->adventure = $adventure;
-        $this->health = $health;
     }
 
-    public function attack($target) {
-        $damage = $this->getMonsterModel()->getAttackDamage();
-
-        $target->damage($damage);
-
-        return $damage;
+    public function getAttackDamage()
+    {
+        return $this->getMonsterModel()->getAttackDamage();
     }
+
 
     public static function createMonster(MonsterModel $monsterModel, Adventure $adventure) {
 
@@ -67,14 +53,6 @@ class Monster extends LivingEntity {
     public function getMonsterModel()
     {
         return $this->monsterModel;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getName() {

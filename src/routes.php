@@ -189,7 +189,6 @@ function processAction(Adventure $adventure, $user, $action) {
                         $targetAdventureCharacter = AdventureCharacter::getAdventureCharacter($targetCharacter, $adventure);
                         if ($targetAdventureCharacter != null) {
                             $damage = $monster->attack($targetAdventureCharacter);
-                            EventMonsterAttack::createMonsterAttack($adventure, $monster, $targetAdventureCharacter, $damage);
                         }
                     }
                 }

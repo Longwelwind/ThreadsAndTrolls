@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2015 at 04:56 PM
+-- Generation Time: Jan 09, 2015 at 03:11 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -33,14 +33,15 @@ CREATE TABLE IF NOT EXISTS `ability` (
   `icon` varchar(255) NOT NULL,
   `ability_class` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `ability`
 --
 
 INSERT INTO `ability` (`id`, `tag`, `name`, `icon`, `ability_class`) VALUES
-(1, 'fireball', 'Boule de feu', 'fireball', 'abilityfireball');
+(1, 'fireball', 'Boule de feu', 'fireball', 'abilityfireball'),
+(2, 'heal', 'Heal', 'heal', 'abilityheal');
 
 -- --------------------------------------------------------
 
@@ -88,33 +89,6 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `event_character_attack`
---
-
-CREATE TABLE IF NOT EXISTS `event_character_attack` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `monster_id` int(11) NOT NULL,
-  `adventure_character_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_character_inflict_damage`
---
-
-CREATE TABLE IF NOT EXISTS `event_character_inflict_damage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `adventure_character_id` int(11) NOT NULL,
-  `monster_id` int(11) NOT NULL,
-  `damage` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `event_character_use_ability`
 --
 
@@ -122,6 +96,32 @@ CREATE TABLE IF NOT EXISTS `event_character_use_ability` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `adventure_character_id` int(11) NOT NULL,
   `ability_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_entity_attack`
+--
+
+CREATE TABLE IF NOT EXISTS `event_entity_attack` (
+  `id` int(11) NOT NULL,
+  `target_living_entity_id` int(11) NOT NULL,
+  `attacker_living_entity_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_entity_inflict_damage`
+--
+
+CREATE TABLE IF NOT EXISTS `event_entity_inflict_damage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `attacker_living_entity_id` int(11) NOT NULL,
+  `target_living_entity_id` int(11) NOT NULL,
+  `damage` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -149,47 +149,6 @@ CREATE TABLE IF NOT EXISTS `event_level_up` (
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_monster_attack`
---
-
-CREATE TABLE IF NOT EXISTS `event_monster_attack` (
-  `id` int(11) NOT NULL,
-  `monster_id` int(11) NOT NULL,
-  `adventure_character_id` int(11) NOT NULL,
-  `damage` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `event_monster_attack`
---
-
-INSERT INTO `event_monster_attack` (`id`, `monster_id`, `adventure_character_id`, `damage`) VALUES
-(16, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(18, 1, 2, 40),
-(33, 1, 4, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(11, 1, 1, 40),
-(13, 1, 1, 40),
-(13, 1, 1, 40);
 
 -- --------------------------------------------------------
 
@@ -231,6 +190,20 @@ CREATE TABLE IF NOT EXISTS `event_statistic_test` (
   `count_dice_side` int(11) NOT NULL,
   `roll_dice_result` int(11) NOT NULL,
   `required_amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `living_entity`
+--
+
+CREATE TABLE IF NOT EXISTS `living_entity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `adventure_id` int(11) NOT NULL,
+  `health` int(11) NOT NULL,
+  `living_entity_type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
