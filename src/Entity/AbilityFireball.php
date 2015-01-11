@@ -34,9 +34,9 @@ class AbilityFireball extends Ability {
         return array($monster);
     }
 
-    public function getDescription(AdventureCharacter $adventureCharacter)
+    public function getDescription(Character $adventureCharacter)
     {
-        return "lol";
+        return "Envoie une boule de feu faisant X points de dégats";
     }
 
 }
