@@ -36,6 +36,7 @@ abstract class LivingEntity {
 
     public abstract function getAttackDamage();
     public abstract function getName();
+    public abstract function getMaxHealth();
 
     public function attack(LivingEntity $target) {
         $damage = $this->getAttackDamage();
@@ -53,11 +54,34 @@ abstract class LivingEntity {
         return $damage;
     }
 
+    public function heal($damage) {
+        $this->setHealth($this->getHealth() + $damage);
+
+        return $damage;
+    }
+
     public function inflictDamage(LivingEntity $target, $damage, $damageType = 0) {
         EventEntityInflictDamage::createEventEntityInflictDamage($this->getAdventure(), $this, $target, $damage);
         $finalDamage = $target->damage($damage);
 
         return $finalDamage;
+    }
+
+    public function healDamage(LivingEntity $target, $damage) {
+        EventEntityHealDamage::createEventEntityHealDamage($this->getAdventure(), $this, $target, $damage);
+        $finalDamage = $target->heal($damage);
+
+        return $finalDamage;
+    }
+
+    public function getPercentageHealth() {
+        $health = $this->getHealth();
+        $maxHealth = $this->getMaxHealth();
+
+        if ($maxHealth == 0)
+            return 0;
+
+        return 100*($health/$maxHealth);
     }
 
     /**
