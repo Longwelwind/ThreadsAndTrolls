@@ -24,12 +24,7 @@
     </div>
     <div class="all-75" style="padding: 5px;">
         <div>
-            <div>
-                <b>
-                    Caractéristiques:
-                </b>
-            </div>
-            <b><?= $character->getStatisticPoints(); ?></b> points de caractéristiques à attribuer
+            <h3 class="no-marg-padd">Caractéristiques <small>(<b><?= $character->getStatisticPoints(); ?></b> points à attribuer)</small></h3>
             <table class="ink-table bordered">
                 <?php foreach ($stats as $stat) { ?>
                     <tr>
@@ -43,24 +38,56 @@
                 <?php } ?>
             </table>
         </div>
-        <div>
-            <div>
-                <b>
-                    Objets:
-                </b>
-            </div>
-            [In progress...]
-        </div>
 
         <div>
-            <div>
-                <b>
-                    Sorts:
-                </b>
-            </div>
-            [In progress...]
+            <h3 class="no-marg-padd">Sorts <small>(<b><?= $character->getAbilityPoints(); ?></b> points de compétence)</small></h3>
+            <?php foreach($professionAbilitiesTiers as $tierLevel => $professionAbilitiesTier) { ?>
+
+                <?php if ($tierLevel > 0) { ?>
+                    <div><b>Compétences de niveau <?= $tierLevel ?></b></div>
+                <?php } else { ?>
+                    <div><b>Compétences de départ</b></div>
+                <?php } ?>
+
+                <?php foreach($professionAbilitiesTier as $professionAbility) { ?>
+
+                    <div class="tt-content ability-tt" id="tooltip-<?= $professionAbility->getAbility()->getTag() ?>">
+
+                        <div>
+                            <b>
+                                <?= $professionAbility->getAbility()->getName(); ?>
+                            </b>
+                            <small>
+                                (<?= $professionAbility->getAbility()->getTag(); ?>)
+                            </small>
+                        </div>
+                        <div>
+                            <?= $professionAbility->getAbility()->getDescription($character); ?>
+                        </div>
+
+
+                    </div>
+
+                    <div class="tt slot <?php if ($character->isAbilityKnown($professionAbility->getAbility())) { ?>
+                                                slot-<?= $character->getProfession()->getTag() ?>
+                                            <?php } ?>"
+                         data-tooltip-template="#tooltip-<?= $professionAbility->getAbility()->getTag() ?>">
+
+                        <div class="icon icon-<?= $professionAbility->getAbility()->getIcon() ?>">
+                        </div>
+
+                    </div>
+
+                <?php } ?>
+
+            <?php } ?>
         </div>
 
+    </div>
+
+    <div>
+        <h3 class="no-marg-padd">Objets:</h3>
+        [In progress...]
     </div>
 </div>
 

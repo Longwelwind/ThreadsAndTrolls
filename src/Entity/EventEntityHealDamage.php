@@ -7,14 +7,14 @@ use ThreadsAndTrolls\Database;
 
 /**
  * @Entity
- * @Table(name="event_entity_inflict_damage")
+ * @Table(name="event_entity_heal_damage")
  */
-class EventEntityInflictDamage extends Event {
+class EventEntityHealDamage extends Event {
     /**
      * @OneToOne(targetEntity="LivingEntity")
-     * @JoinColumn(name="attacker_living_entity_id")
+     * @JoinColumn(name="healer_living_entity_id")
      */
-    private $attacker;
+    private $healer;
 
     /**
      * @OneToOne(targetEntity="LivingEntity")
@@ -27,22 +27,22 @@ class EventEntityInflictDamage extends Event {
      */
     private $damage;
 
-    public function __construct($adventure, LivingEntity $attacker, LivingEntity $target, $damage)
+    public function __construct($adventure, LivingEntity $healer, LivingEntity $target, $damage)
     {
         parent::__construct($adventure);
-        $this->attacker = $attacker;
+        $this->healer = $healer;
         $this->target = $target;
         $this->damage = $damage;
     }
 
     public function displayRow()
     {
-        include(__DIR__ . "/../../views/event/entity_inflict_damage.php");
+        include(__DIR__ . "/../../views/event/entity_heal_damage.php");
     }
 
-    public static function createEventEntityInflictDamage(Adventure $adventure, LivingEntity $attacker, LivingEntity $target, $damage)
+    public static function createEventEntityHealDamage(Adventure $adventure, LivingEntity $healer, LivingEntity $target, $damage)
     {
-        $event = new EventEntityInflictDamage($adventure, $attacker, $target, $damage);
+        $event = new EventEntityHealDamage($adventure, $healer, $target, $damage);
 
         $adventure->getEvents()->add($event);
 
@@ -54,9 +54,9 @@ class EventEntityInflictDamage extends Event {
     /**
      * @return mixed
      */
-    public function getAttacker()
+    public function getHealer()
     {
-        return $this->attacker;
+        return $this->healer;
     }
 
     /**

@@ -24,6 +24,31 @@ $klein->respond('GET', '/', function($request) {
 
 });
 
+/**
+ * Sort the ProfessionAbility elements with their requried levels to create "tier" of abilities
+ * @param $professionAbilitiesList List of ProfessionAbility to sort
+ * @return array Returns an associative array in the form of:
+ * {
+ *  "2" => ProfessionAbility[]
+ *  "5" => ProfessionAbility[]
+ * }
+ */
+function sortAbilitiesByRequiredLevel($professionAbilitiesList) {
+    $abilitiesTiers = array();
+
+    foreach ($professionAbilitiesList as $professionAbility) {
+        $key = $professionAbility->getRequiredLevel();
+
+        if (!array_key_exists($key, $abilitiesTiers)) {
+            $abilitiesTiers[$key] = array();
+        }
+
+        $abilitiesTiers[$key][] = $professionAbility;
+    }
+
+    return $abilitiesTiers;
+}
+
 $klein->respond('GET', '/character/[:id]', function($request) {
 
     $characterId = $request->id;
@@ -41,6 +66,8 @@ $klein->respond('GET', '/character/[:id]', function($request) {
     foreach ($displayedStatsId as $statId) {
         $displayedStats[] = Statistic::getStatistic($statId);
     }
+
+    $professionAbilitiesTiers = sortAbilitiesByRequiredLevel($character->getProfession()->getProfessionAbilities());
 
     $templatePart = "character";
     include(__DIR__ . "/../views/template.php");
@@ -215,13 +242,16 @@ function processAction(Adventure $adventure, $user, $action) {
 
                     $ability = Ability::getAbilityByTag($actionArgs[0]);
                     if ($ability != null) {
+                        if ($character->isAbilityKnown($ability)) {
 
-                        $argumentsRaw = array_slice($actionArgs, 1);
-                        // We check if the arguments given by the user are good (good nicknames, ...)
-                        $arguments = $ability->processArguments($adventure, $adventureCharacter, $argumentsRaw);
+                            $argumentsRaw = array_slice($actionArgs, 1);
+                            // We check if the arguments given by the user are good (good nicknames, ...)
+                            $arguments = $ability->processArguments($adventure, $adventureCharacter, $argumentsRaw);
 
-                        if ($arguments !== false) {
-                            $adventureCharacter->useAbility($ability, $arguments);
+                            if ($arguments !== false) {
+                                $adventureCharacter->useAbility($ability, $arguments);
+                            }
+
                         }
                     }
 
@@ -264,6 +294,17 @@ function processAction(Adventure $adventure, $user, $action) {
                     }
                 }
 
+            } else if ($actionName == "learnability") {
+                $ability = Ability::getAbilityByTag($actionArgs[0]);
+
+                if ($ability != null) {
+                    if ($character->canLearn($ability) && !$character->isAbilityKnown($ability)
+                        && $character->getAbilityPoints() > 0) {
+
+                        $character->learnAbility($ability);
+
+                    }
+                }
             }
 
 

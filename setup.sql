@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2015 at 03:11 PM
+-- Generation Time: Jan 11, 2015 at 05:14 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `ability` (
   `icon` varchar(255) NOT NULL,
   `ability_class` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `ability`
@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `ability` (
 
 INSERT INTO `ability` (`id`, `tag`, `name`, `icon`, `ability_class`) VALUES
 (1, 'fireball', 'Boule de feu', 'fireball', 'abilityfireball'),
-(2, 'heal', 'Heal', 'heal', 'abilityheal');
+(2, 'heal', 'Heal', 'heal', 'abilityheal'),
+(3, 'execution', 'Execution', 'execution', 'abilityexecution');
 
 -- --------------------------------------------------------
 
@@ -72,6 +73,18 @@ CREATE TABLE IF NOT EXISTS `adventure_character` (
   `health` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `character_ability`
+--
+
+CREATE TABLE IF NOT EXISTS `character_ability` (
+  `character_id` int(11) NOT NULL,
+  `ability_id` int(11) NOT NULL,
+  PRIMARY KEY (`character_id`,`ability_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -110,6 +123,20 @@ CREATE TABLE IF NOT EXISTS `event_entity_attack` (
   `target_living_entity_id` int(11) NOT NULL,
   `attacker_living_entity_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_entity_heal_damage`
+--
+
+CREATE TABLE IF NOT EXISTS `event_entity_heal_damage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `healer_living_entity_id` int(11) NOT NULL,
+  `target_living_entity_id` int(11) NOT NULL,
+  `damage` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -257,6 +284,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `level` int(11) NOT NULL,
   `experience` int(11) NOT NULL,
   `statistic_points` int(11) NOT NULL,
+  `ability_points` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -284,7 +312,6 @@ CREATE TABLE IF NOT EXISTS `profession` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `tag` varchar(255) NOT NULL,
-  `icon` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
@@ -292,11 +319,42 @@ CREATE TABLE IF NOT EXISTS `profession` (
 -- Dumping data for table `profession`
 --
 
-INSERT INTO `profession` (`id`, `name`, `tag`, `icon`) VALUES
-(1, 'Guerrier', 'warrior', ''),
-(2, 'Sorcier', 'wizard', ''),
-(3, 'Clerc', 'clerc', ''),
-(4, 'Voleur', 'rogue', '');
+INSERT INTO `profession` (`id`, `name`, `tag`) VALUES
+(1, 'Guerrier', 'warrior'),
+(2, 'Sorcier', 'wizard'),
+(3, 'Clerc', 'clerc'),
+(4, 'Voleur', 'rogue');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profession_ability`
+--
+
+CREATE TABLE IF NOT EXISTS `profession_ability` (
+  `profession_id` int(11) NOT NULL,
+  `ability_id` int(11) NOT NULL,
+  `required_level` int(11) NOT NULL,
+  PRIMARY KEY (`profession_id`,`ability_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `profession_ability`
+--
+
+INSERT INTO `profession_ability` (`profession_id`, `ability_id`, `required_level`) VALUES
+(1, 1, 0),
+(1, 2, 0),
+(1, 3, 3),
+(2, 1, 0),
+(2, 2, 0),
+(2, 3, 3),
+(3, 1, 0),
+(3, 2, 3),
+(3, 3, 0),
+(4, 1, 3),
+(4, 2, 0),
+(4, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -343,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `race_statistic` (
 INSERT INTO `race_statistic` (`id`, `race_id`, `statistic_id`, `amount`) VALUES
 (1, 1, 1, 7),
 (2, 1, 2, 4),
-(3, 1, 3, 4),
+(3, 1, 3, 3),
 (4, 2, 1, 5),
 (5, 2, 2, 8),
 (6, 2, 3, 5),

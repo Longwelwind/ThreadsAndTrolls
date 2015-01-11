@@ -2,6 +2,7 @@
 
 
 namespace ThreadsAndTrolls\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use ThreadsAndTrolls\Database;
 
 /**
@@ -28,21 +29,40 @@ class Profession {
     private $tag;
 
     /**
-     * @Column(length=255)
+     * @OneToMany(targetEntity="ProfessionAbility", mappedBy="profession")
      */
-    private $icon;
+    private $professionAbilities;
+
+    public function __construct() {
+        $this->professionAbilities = new ArrayCollection();
+    }
+
+    public function getProfessionAbilityByAbility($ability) {
+
+        foreach ($this->getProfessionAbilities() as $professionAbility) {
+            if ($professionAbility->getAbility() == $ability) {
+                return $professionAbility;
+            }
+        }
+
+        return null;
+    }
+
+    public function getStartingAbilities()
+    {
+        $startingAbilities = array();
+
+        foreach ($this->getProfessionAbilities() as $professionAbility) {
+            if ($professionAbility->getRequiredLevel() == 0)
+                $startingAbilities[] = $professionAbility->getAbility();
+        }
+
+        return $startingAbilities;
+    }
 
     public static function getProfessionByTag($tag) {
         return Database::getRepository("ThreadsAndTrolls\\Entity\\Profession")
             ->findOneBy(array("tag" => $tag));
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIcon()
-    {
-        return $this->icon;
     }
 
     /**
@@ -61,6 +81,11 @@ class Profession {
         return $this->tag;
     }
 
-
-
+    /**
+     * @return mixed
+     */
+    public function getProfessionAbilities()
+    {
+        return $this->professionAbilities->toArray();
+    }
 } 

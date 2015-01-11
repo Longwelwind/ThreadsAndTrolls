@@ -38,7 +38,7 @@ abstract class Ability {
 
     abstract public function processArguments(Adventure $adventure, AdventureCharacter $caster, $argumentsRaw);
 
-    abstract public function getDescription(AdventureCharacter $adventureCharacter);
+    abstract public function getDescription(Character $adventureCharacter);
 
     public static function getAbilityByTag($tag) {
         return Database::getRepository("ThreadsAndTrolls\\Entity\\Ability")

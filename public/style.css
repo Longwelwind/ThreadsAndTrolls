@@ -15,6 +15,15 @@ small {
     color: inherit;
 }
 
+.no-marg-padd {
+    margin: 0px;
+    padding: 0px;
+}
+
+.hide {
+    display: none;
+}
+
 .no-style:hover {
     text-decoration: none;
     color: inherit;
@@ -150,6 +159,7 @@ small {
 .icon-warrior {
     background-position: calc(-4 * 34px) calc(-5 * 34px);
 }
+
 .icon-clerc {
     background-position: calc(-11 * 34px) calc(-9 * 34px);
 }
@@ -162,4 +172,67 @@ small {
 
 .icon-fireball {
     background-position: calc(-2 * 34px) calc(-20 * 34px);
+}
+
+.icon-execution {
+    background-position: calc(-0 * 34px) calc(-25 * 34px);
+}
+
+.icon-heal {
+    background-position: calc(-9 * 34px) calc(-22 * 34px);
+}
+
+.slot {
+    width: 36px;
+    height: 36px;
+    padding: 0px;
+    border-radius: 3px;
+
+    border: 1px solid #BBB;
+    background-color: white;
+    display: inline-block;
+
+}
+
+.slot-wizard {
+    border: 1px solid #1E5B98;
+    background: rgba(15, 117, 218, 0.25);
+}
+
+.slot-warrior {
+    border: 1px solid #891E1E;
+    background: rgba(201, 17, 17, 0.25);
+}
+
+.slot-clerc {
+    border: 1px solid #B87814;
+    background: rgba(255, 156, 0, 0.25);
+}
+
+.slot-rogue {
+    border: 1px solid #38621D;
+    background: rgba(74, 155, 23, 0.25);
+}
+
+/**
+ * Ability tooltips
+ */
+
+.tt {
+
+}
+
+.tt-content {
+    position: absolute;
+}
+
+.ability-tt {
+    background: white;
+    width: 250px;
+    font-size: 14px;
+
+    padding: 5px;
+    border-radius: 5px;
+
+    border: 1px solid #BBB;
 }

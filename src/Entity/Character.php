@@ -51,6 +51,11 @@ class Character {
     private $statisticPoints;
 
     /**
+     * @Column(type="integer", name="ability_points")
+     */
+    private $abilityPoints;
+
+    /**
      * @OneToOne(targetEntity="Race")
      * @JoinColumn(name="race_id", referencedColumnName="id")
      */
@@ -62,10 +67,20 @@ class Character {
      */
     private $profession;
 
+    /**
+     * @ManyToMany(targetEntity="Ability")
+     * @JoinTable(name="character_ability",
+     *      joinColumns={@JoinColumn(name="character_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="ability_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $abilities;
+
     const STATISTIC_POINTS_PER_LEVEL = 2;
     const EXPERIENCE_PER_LEVEL_STEP = 20;
+    const ABILITY_POINTS_PER_LEVEL = 1;
 
-    function __construct($owner, $name, $race, $profession, $level = 1, $experience = 0, $statisticPoints = 0)
+    function __construct($owner, $name, $race, $profession, $level = 1, $experience = 0, $statisticPoints = 0, $abilityPoints = 0)
     {
         $this->experience = $experience;
         $this->level = $level;
@@ -74,8 +89,10 @@ class Character {
         $this->race = $race;
         $this->profession = $profession;
         $this->statisticPoints = $statisticPoints;
+        $this->abilityPoints = $abilityPoints;
 
         $this->statistics = new ArrayCollection();
+        $this->abilities = new ArrayCollection();
     }
 
 
@@ -137,6 +154,39 @@ class Character {
         }
     }
 
+    public function learnAbility($ability)
+    {
+        $this->addAbility($ability);
+
+        $this->abilityPoints -= 1;
+    }
+
+    public function canLearn($ability)
+    {
+        $professionAbility = $this->profession->getProfessionAbilityByAbility($ability);
+
+        if ($professionAbility != null) {
+
+            if ($this->getLevel() >= $professionAbility->getRequiredLevel()) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+    }
+
+    public function addAbility(Ability $ability) {
+        $this->abilities->add($ability);
+    }
+
+    public function isAbilityKnown(Ability $ability)
+    {
+        return in_array($ability, $this->getAbilities());
+    }
+
     public function getRequiredExperienceCurrentLevel() {
         return self::getRequiredExperience($this->getLevel());
     }
@@ -144,6 +194,7 @@ class Character {
     public function levelUp() {
         $this->level += 1;
         $this->statisticPoints += self::STATISTIC_POINTS_PER_LEVEL;
+        $this->abilityPoints += self::ABILITY_POINTS_PER_LEVEL;
 
         $this->experience = 0;
     }
@@ -171,9 +222,14 @@ class Character {
             ->findOneBy(array("name" => $name));
     }
 
-    public static function createCharacter($owner, $name, $race, $profession) {
+    public static function createCharacter($owner, $name, $race, Profession $profession) {
 
         $character = new Character($owner, $name, $race, $profession);
+
+        // We make him know the first spells
+        foreach ($profession->getStartingAbilities() as $ability) {
+            $character->addAbility($ability);
+        }
 
         Database::save($character);
 
@@ -271,5 +327,21 @@ class Character {
     public function getProfession()
     {
         return $this->profession;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAbilities()
+    {
+        return $this->abilities->toArray();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAbilityPoints()
+    {
+        return $this->abilityPoints;
     }
 } 
