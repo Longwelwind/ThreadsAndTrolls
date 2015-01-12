@@ -99,6 +99,8 @@ abstract class LivingEntity {
     {
         if ($health < 0) {
             $health = 0;
+        } else if ($health > $this->getMaxHealth()) {
+            $health = $this->getMaxHealth();
         }
 
         $this->health = $health;
