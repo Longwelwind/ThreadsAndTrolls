@@ -27,11 +27,23 @@ class AbilityFireball extends Ability {
         if (count($argumentsRaw) != 1)
             return false;
 
-        $monster = Monster::getMonster($argumentsRaw[0]);
-        if ($monster == null)
-            return false;
+        if (is_numeric($argumentsRaw[0])) {
 
-        return array($monster);
+            $target = Monster::getMonster($argumentsRaw[0]);
+
+        } else {
+
+            $targetCharacter = Character::getCharacterByName($argumentsRaw[0]);
+
+            if ($targetCharacter == null)
+                return false;
+
+
+            $target = AdventureCharacter::getAdventureCharacter($targetCharacter, $adventure);
+        }
+
+
+        return array($target);
     }
 
     public function getDescription(Character $adventureCharacter)

@@ -35,7 +35,21 @@ class AbilityExecution extends Ability {
         if (count($argumentsRaw) != 1)
             return false;
 
-        $target = Monster::getMonster($argumentsRaw[0]);
+        if (is_numeric($argumentsRaw[0])) {
+
+            $target = Monster::getMonster($argumentsRaw[0]);
+
+        } else {
+
+            $targetCharacter = Character::getCharacterByName($argumentsRaw[0]);
+
+            if ($targetCharacter == null)
+                return false;
+
+
+            $target = AdventureCharacter::getAdventureCharacter($targetCharacter, $adventure);
+        }
+
 
         return array($target);
     }

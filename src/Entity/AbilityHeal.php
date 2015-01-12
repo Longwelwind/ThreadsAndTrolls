@@ -11,7 +11,7 @@ class AbilityHeal extends Ability {
     {
         $target = $arguments[0];
 
-        $target->healDamage($target, $this->getHealAmount($caster));
+        $caster->healDamage($target, $this->getHealAmount($caster));
     }
 
     public function getHealAmount(AdventureCharacter $adventureCharacter)
@@ -24,10 +24,26 @@ class AbilityHeal extends Ability {
         if (count($argumentsRaw) != 1)
             return false;
 
-        $target = Character::getCharacterByName($argumentsRaw[0]);
-        if ($target == null)
-            return $target;
-        $target = AdventureCharacter::getAdventureCharacter($target, $adventure);
+        if (is_numeric($argumentsRaw[0])) {
+
+            $target = Monster::getMonster($argumentsRaw[0]);
+
+        } else {
+
+            $targetCharacter = Character::getCharacterByName($argumentsRaw[0]);
+
+            if ($targetCharacter == null)
+                return false;
+
+
+            $target = AdventureCharacter::getAdventureCharacter($targetCharacter, $adventure);
+        }
+
+
+
+
+
+
 
         return array($target);
     }
