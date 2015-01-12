@@ -3,6 +3,7 @@
 
 namespace ThreadsAndTrolls\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use ThreadsAndTrolls\Database;
 
 /**
@@ -97,6 +98,15 @@ class Character {
 
 
     public function getStatisticAmount($statistic) {
+
+        if (is_numeric($statistic)) {
+            $statistic = Statistic::getStatistic($statistic);
+        } else if ($statistic instanceof Statistic) {
+            // OK
+        } else {
+            throw new \InvalidArgumentException("statistic is not an instance of Statistic or a number");
+        }
+
         $amount = 0;
 
         // The total amount of a statistic is composed of the amount from the race and the gained amount
