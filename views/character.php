@@ -41,15 +41,15 @@
 
         <div>
             <h3 class="no-marg-padd">Sorts <small>(<b><?= $character->getAbilityPoints(); ?></b> points de compétence)</small></h3>
-            <?php foreach($professionAbilitiesTiers as $tierLevel => $professionAbilitiesTier) { ?>
+            <?php foreach($professionAbilitiesTiers as $professionAbilitiesTier) { ?>
 
-                <?php if ($tierLevel > 0) { ?>
-                    <div><b>Compétences de niveau <?= $tierLevel ?></b></div>
+                <?php if ($professionAbilitiesTier["level"] > 0) { ?>
+                    <div><b>Compétences de niveau <?= $professionAbilitiesTier["level"] ?></b></div>
                 <?php } else { ?>
                     <div><b>Compétences de départ</b></div>
                 <?php } ?>
 
-                <?php foreach($professionAbilitiesTier as $professionAbility) { ?>
+                <?php foreach($professionAbilitiesTier["abilities"] as $professionAbility) { ?>
 
                     <div class="tt-content ability-tt" id="tooltip-<?= $professionAbility->getAbility()->getTag() ?>">
 

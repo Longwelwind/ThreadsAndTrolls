@@ -28,22 +28,46 @@ $klein->respond('GET', '/', function($request) {
  * Sort the ProfessionAbility elements with their requried levels to create "tier" of abilities
  * @param $professionAbilitiesList List of ProfessionAbility to sort
  * @return array Returns an associative array in the form of:
- * {
- *  "2" => ProfessionAbility[]
- *  "5" => ProfessionAbility[]
- * }
+ * [
+ *   {
+ *     "level" => 2,
+ *     "abilities" => ProfessionAbility[]
+ *   },
+ *   {
+ *     "level" => 5,
+ *     "abilities" => ProfessionAbility[]
+ *   }
+ * ]
  */
 function sortAbilitiesByRequiredLevel($professionAbilitiesList) {
+    // We first retrieve a list of all the levels
+    $levelTiers = array();
+    foreach ($professionAbilitiesList as $professionAbility) {
+        $level = $professionAbility->getRequiredLevel();
+
+        if (!in_array($level, $levelTiers)) {
+            $levelTiers[] = $level;
+        }
+    }
+
+    sort($levelTiers);
+
     $abilitiesTiers = array();
 
-    foreach ($professionAbilitiesList as $professionAbility) {
-        $key = $professionAbility->getRequiredLevel();
+    foreach ($levelTiers as $levelTier) {
+        $abilitiesTier = array();
 
-        if (!array_key_exists($key, $abilitiesTiers)) {
-            $abilitiesTiers[$key] = array();
+        foreach ($professionAbilitiesList as $professionAbility) {
+
+            if ($levelTier == $professionAbility->getRequiredLevel()) {
+                $abilitiesTier[] = $professionAbility;
+            }
         }
 
-        $abilitiesTiers[$key][] = $professionAbility;
+        $abilitiesTiers[] = array(
+            "level" => $levelTier,
+            "abilities" => $abilitiesTier,
+        );
     }
 
     return $abilitiesTiers;
