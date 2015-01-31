@@ -15,9 +15,11 @@
                         <i>(<?= $advCharacter->getCharacter()->getRace()->getName(); ?>
                             <?= $advCharacter->getCharacter()->getProfession()->getName(); ?>)</i>
                     </div>
+
                     <div class="push-center">
                         <?= $advCharacter->getHealth(); ?>/<?=$advCharacter->getMaxHealth(); ?>
                     </div>
+
                     <div class="push-center" style="width: 120px;">
                         <div class="progress-bar">
                             <div class="progress-filled red"
@@ -27,6 +29,21 @@
 
                         </div>
                     </div>
+
+                    <?php if (count($advCharacter->getEffects()) > 0) { ?>
+                    <div style="margin-top: 3px; margin-bottom: -5px;">
+                        <?php foreach ($advCharacter->getEffects() as $effect) { ?>
+
+                            <div id="effect-<?= $effect->getId(); ?>" class="tt-content">lol</div>
+                            <div class="tt slot slot-effect" data-tooltip-template="#effect-<?= $effect->getId(); ?>">
+                                <div class="icon icon-<?= $effect->getModel()->getIcon(); ?>">
+
+                                </div>
+                            </div>
+
+                        <?php } ?>
+                    </div>
+                    <?php } ?>
                 </div>
             </a>
         </div>

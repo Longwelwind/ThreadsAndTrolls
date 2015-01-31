@@ -51,7 +51,7 @@
 
                 <?php foreach($professionAbilitiesTier["abilities"] as $professionAbility) { ?>
 
-                    <div class="tt-content ability-tt" id="tooltip-<?= $professionAbility->getAbility()->getTag() ?>">
+                    <div class="tt-content" id="tooltip-<?= $professionAbility->getAbility()->getTag() ?>">
 
                         <div>
                             <b>
@@ -63,6 +63,13 @@
                         </div>
                         <div>
                             <?= $professionAbility->getAbility()->getDescription($character); ?>
+                        </div>
+                        <div style="margin-top: 6px;">
+                            <?php if ($character->isAbilityKnown($professionAbility->getAbility())) { ?>
+                                <b>Appris</b>
+                            <?php } else { ?>
+                                <b>Inconnu</b>
+                            <?php } ?>
                         </div>
 
 

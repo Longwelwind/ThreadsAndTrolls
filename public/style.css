@@ -155,11 +155,13 @@ small {
     background-position: calc(-7 * 34px) calc(-22 * 34px);
 }
 
+/**
+ * Class icons
+ */
 
 .icon-warrior {
     background-position: calc(-4 * 34px) calc(-5 * 34px);
 }
-
 .icon-clerc {
     background-position: calc(-11 * 34px) calc(-9 * 34px);
 }
@@ -169,6 +171,10 @@ small {
 .icon-rogue {
     background-position: calc(-2 * 34px) calc(-6 * 34px);
 }
+
+/**
+ * Ability icons
+ */
 
 .icon-fireball {
     background-position: calc(-2 * 34px) calc(-20 * 34px);
@@ -182,6 +188,17 @@ small {
     background-position: calc(-9 * 34px) calc(-22 * 34px);
 }
 
+/**
+ * Effect icons
+ */
+.icon-display {
+    background-position: calc(-0 * 34px) calc(-25 * 34px);
+}
+
+/**
+ * Slot
+ */
+
 .slot {
     width: 36px;
     height: 36px;
@@ -193,6 +210,10 @@ small {
     display: inline-block;
 
 }
+
+/**
+ * Class abilities slots
+ */
 
 .slot-wizard {
     border: 1px solid #1E5B98;
@@ -215,7 +236,15 @@ small {
 }
 
 /**
- * Ability tooltips
+ * Effect slots
+ */
+
+.slot-effect {
+
+}
+
+/**
+ * Tooltips
  */
 
 .tt {
@@ -224,9 +253,10 @@ small {
 
 .tt-content {
     position: absolute;
-}
 
-.ability-tt {
+    text-align: left;
+    color: #404040;
+
     background: white;
     width: 250px;
     font-size: 14px;

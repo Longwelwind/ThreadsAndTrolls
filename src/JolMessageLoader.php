@@ -14,8 +14,8 @@ class JolMessageLoader {
     public function loadMessages() {
         $url = "http://flux.jeuxonline.info/fil-" . $this->threadId . "-50.rss";
 
-        $rssRaw = file_get_contents($url);
-        //$rssRaw = file_get_contents(__DIR__ . "/test.xml"); // Fake RSS input for testing
+        //$rssRaw = file_get_contents($url);
+        $rssRaw = file_get_contents(__DIR__ . "/test.xml"); // Fake RSS input for testing
 
         $messages = array();
 

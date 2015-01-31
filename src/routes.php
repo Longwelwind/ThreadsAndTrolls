@@ -54,6 +54,7 @@ function sortAbilitiesByRequiredLevel($professionAbilitiesList) {
 
     $abilitiesTiers = array();
 
+    // We now get all the spells for each levels
     foreach ($levelTiers as $levelTier) {
         $abilitiesTier = array();
 

@@ -2,6 +2,8 @@
 
 
 namespace ThreadsAndTrolls\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use ThreadsAndTrolls\Database;
 
 /**
  * @Entity
@@ -28,10 +30,17 @@ abstract class LivingEntity {
      */
     private $health;
 
+    /**
+     * @OneToMany(targetEntity="Effect", mappedBy="bearer")
+     */
+    private $effects;
+
     function __construct($adventure, $health)
     {
         $this->adventure = $adventure;
         $this->health = $health;
+
+        $this->effects = new ArrayCollection();
     }
 
     public abstract function getAttackDamage();
@@ -120,5 +129,13 @@ abstract class LivingEntity {
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEffects()
+    {
+        return $this->effects->toArray();
     }
 } 
