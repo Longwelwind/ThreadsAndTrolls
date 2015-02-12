@@ -2,8 +2,15 @@
 
 
 namespace ThreadsAndTrolls\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
-use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Action\Action;
+use ThreadsAndTrolls\Action\ActionEntityAction;
+use ThreadsAndTrolls\Action\ActionEntityAttack;
+use ThreadsAndTrolls\Action\ActionEntityDamage;
+use ThreadsAndTrolls\Action\ActionEntityHeal;
+use ThreadsAndTrolls\Action\ActionEntityStatGet;
+use ThreadsAndTrolls\Action\ActionEntityUseAbility;
 
 /**
  * @Entity
@@ -48,12 +55,42 @@ abstract class LivingEntity {
     public abstract function getMaxHealth();
 
     public function attack(LivingEntity $target) {
-        $damage = $this->getAttackDamage();
+        $baseDamage = $this->getAttackDamage();
+
+        // We trigger the action
+        $action = new ActionEntityAttack($target, $this, $baseDamage, Action::BEFORE);
+        $this->adventure->onEntityAttack($action);
+
+        if ($action->isCancelled()) {
+            // The attack has been cancelled
+            return 0;
+        }
+
+        $transitionDamage = $action->getFinalDamage();
 
         EventEntityAttack::createEventEntityAttack($this->getAdventure(), $this, $target);
-        $finalDamage = $this->inflictDamage($target, $damage);
+        $finalDamage = $this->inflictDamage($target, $transitionDamage);
+
+        // We trigger the AFTER action
+        $action->proceed();
+        $this->adventure->onEntityAttack($action);
 
         return $finalDamage;
+    }
+
+    public function addEffect(LivingEntity $origin, EffectModel $model, $data) {
+        // We must first check if an effect from the same origin and with the same model
+        // TODO: check that
+
+        $effect = Effect::createEffect($origin, $this, $model, $data);
+
+        $this->effects->add($effect);
+
+        return $effect;
+    }
+
+    public function removeEffect(Effect $effect) {
+        return $this->effects->removeElement($effect);
     }
 
     public function damage($damage)
@@ -91,6 +128,47 @@ abstract class LivingEntity {
             return 0;
 
         return 100*($health/$maxHealth);
+    }
+
+    /*
+     * ActionListener stuff
+     */
+
+    public function onEntityStatGet(ActionEntityStatGet $action) {
+        foreach ($this->getEffects() as $effect) {
+            $effect->onEntityAttack($action);
+        }
+    }
+
+    public function onEntityAttack(ActionEntityAttack $action) {
+
+        foreach ($this->getEffects() as $effect) {
+            $effect->onEntityAttack($action);
+        }
+    }
+
+    public function onEntityUseAbility(ActionEntityUseAbility $action) {
+        foreach ($this->getEffects() as $effect) {
+            $effect->onEntityUseAbility($action);
+        }
+    }
+
+    public function onEntityDamage(ActionEntityDamage $action) {
+        foreach ($this->getEffects() as $effect) {
+            $effect->onEntityDamage($action);
+        }
+    }
+
+    public function onEntityHeal(ActionEntityHeal $action) {
+        foreach ($this->getEffects() as $effect) {
+            $effect->onEntityHeal($action);
+        }
+    }
+
+    public function onEntityAction(ActionEntityAction $action) {
+        foreach ($this->getEffects() as $effect) {
+            $effect->onEntityAction($action);
+        }
     }
 
     /**

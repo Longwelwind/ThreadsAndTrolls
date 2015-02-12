@@ -5,13 +5,20 @@ namespace ThreadsAndTrolls\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use ThreadsAndTrolls\Action\ActionEntityAction;
+use ThreadsAndTrolls\Action\ActionEntityAttack;
+use ThreadsAndTrolls\Action\ActionEntityDamage;
+use ThreadsAndTrolls\Action\ActionEntityHeal;
+use ThreadsAndTrolls\Action\ActionEntityStatGet;
+use ThreadsAndTrolls\Action\ActionEntityUseAbility;
+use ThreadsAndTrolls\Action\ActionListener;
 use ThreadsAndTrolls\Database;
 
 /**
  * @Entity
  * @Table(name="adventure")
  */
-class Adventure {
+class Adventure implements ActionListener {
 
     /**
      * @Column(type="integer")
@@ -85,6 +92,50 @@ class Adventure {
 
         return $adventure;
 
+    }
+
+    /**
+     * Event function
+     */
+
+    public function onEntityStatGet(ActionEntityStatGet $action) {
+        foreach ($this->getCharacters() as $character) {
+            $character->onEntityStatGet($action);
+        }
+    }
+
+    public function onEntityAttack(ActionEntityAttack $action) {
+        $this->onEntityAction($action);
+
+        foreach ($this->getCharacters() as $character) {
+            $character->onEntityAttack($action);
+        }
+    }
+
+    public function onEntityUseAbility(ActionEntityUseAbility $action) {
+        $this->onEntityAction($action);
+
+        foreach ($this->getCharacters() as $character) {
+            $character->onEntityAttack($action);
+        }
+    }
+
+    public function onEntityDamage(ActionEntityDamage $action) {
+        foreach ($this->getCharacters() as $character) {
+            $character->onEntityDamage($action);
+        }
+    }
+
+    public function onEntityHeal(ActionEntityHeal $action) {
+        foreach ($this->getCharacters() as $character) {
+            $character->onEntityAttack($action);
+        }
+    }
+
+    public function onEntityAction(ActionEntityAction $action) {
+        foreach ($this->getCharacters() as $character) {
+            $character->onEntityAction($action);
+        }
     }
 
     /**

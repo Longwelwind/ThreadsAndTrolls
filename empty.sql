@@ -9,6 +9,7 @@ TRUNCATE TABLE `event_entity_heal_damage`;
 TRUNCATE TABLE `event_entity_attack`;
 TRUNCATE TABLE `event_level_up`;
 TRUNCATE TABLE `event_reward_experience`;
+TRUNCATE TABLE `effect`;
 TRUNCATE TABLE `living_entity`;
 TRUNCATE TABLE `monster`;
 TRUNCATE TABLE `persona`;

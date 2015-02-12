@@ -7,6 +7,7 @@ namespace ThreadsAndTrolls\Entity;
  * @Entity
  */
 class AbilityFireball extends Ability {
+    const BURN_EFFECT_MODEL_ID = 1;
 
     public function onCast(Adventure $adventure, AdventureCharacter $caster, $arguments)
     {
@@ -15,12 +16,18 @@ class AbilityFireball extends Ability {
         $fireDamage = $this->getDamageAmount($caster);
 
         $caster->inflictDamage($target, $fireDamage);
+
+        // We inflict him the burn effect
+        $data = array(
+            "actionDuration" => 3
+        );
+        $effectModel = EffectModel::find(self::BURN_EFFECT_MODEL_ID);
+        $target->addEffect($caster, $effectModel, $data);
     }
 
     public function getDamageAmount(AdventureCharacter $caster) {
         return 2*$caster->getStatisticAmount(Statistic::getStatistic(Statistic::INTELLIGENCE));
     }
-
 
     public function processArguments(Adventure $adventure, AdventureCharacter $user, $argumentsRaw)
     {
