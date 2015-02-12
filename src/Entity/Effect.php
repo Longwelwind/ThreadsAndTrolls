@@ -82,7 +82,6 @@ class Effect {
 
     public function onEntityAction(ActionEntityAction $action) {
         $this->model->onEntityAction($action, $this->bearer, $this->origin, $this->data);
-        var_dump($this->data);
     }
 
     public static function createEffect(LivingEntity $origin, LivingEntity $bearer, EffectModel $model, $data) {

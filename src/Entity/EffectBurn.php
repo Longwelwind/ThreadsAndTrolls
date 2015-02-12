@@ -30,7 +30,6 @@ class EffectBurn extends EffectModel
 
         if ($action->getTime() == Action::AFTER) {
 
-            echo "LOL";
 
             $origin->inflictDamage($bearer, 5);
 
