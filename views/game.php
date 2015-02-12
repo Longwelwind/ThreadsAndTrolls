@@ -89,6 +89,31 @@
 
                     </div>
                 </div>
+                <?php if (count($monster->getEffects()) > 0) { ?>
+                    <div style="margin-top: 3px; margin-bottom: -5px;">
+                        <?php foreach ($monster->getEffects() as $effect) { ?>
+                            <?php $effectModel = $effect->getModel(); ?>
+
+                            <div id="effect-<?= $effect->getId(); ?>" class="tt-content">
+                                <i class="push-right">(<?= $effect->getDuration(); ?>)</i>
+                                <b><?= $effectModel->getName(); ?></b>
+                                <div>
+                                    <?= $effectModel->getDescription(); ?>
+                                </div>
+                                <div>
+                                    <b>Origin:</b> <?= $effect->getOrigin()->getName(); ?>
+                                </div>
+
+                            </div>
+                            <div class="tt slot slot-effect" data-tooltip-template="#effect-<?= $effect->getId(); ?>">
+                                <div class="icon icon-<?= $effect->getModel()->getIcon(); ?>">
+
+                                </div>
+                            </div>
+
+                        <?php } ?>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     <?php } ?>
