@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ThreadsAndTrolls;
+namespace ThreadsAndTrolls\MessageLoader;
 
 
 class JolMessageLoader {

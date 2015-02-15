@@ -16,6 +16,7 @@ use ThreadsAndTrolls\Entity\Profession;
 use ThreadsAndTrolls\Entity\Race;
 use ThreadsAndTrolls\Entity\Ability;
 use ThreadsAndTrolls\Entity\Statistic;
+use ThreadsAndTrolls\MessageLoader\JolMessageLoader;
 
 $klein->respond('GET', '/', function($request) {
 
@@ -101,7 +102,7 @@ $klein->respond('GET', '/character/[:id]', function($request) {
 
 $klein->respond('GET', '/jol/[:code]', function($request) {
 
-    $messageLoader = new \ThreadsAndTrolls\JolMessageLoader($request->code);
+    $messageLoader = new JolMessageLoader($request->code);
     $adventure = checkGame("jol", $request->code, $messageLoader->loadMessages());
 
     if ($adventure != null) {
