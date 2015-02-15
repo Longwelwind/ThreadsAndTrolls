@@ -56,32 +56,36 @@ class Effect {
         $this->origin = $origin;
     }
 
+    public function remove() {
+        $this->getBearer()->removeEffect($this);
+    }
+
     public function getDuration() {
-        return $this->model->getDuration($this->bearer, $this->origin, $this->data);
+        return $this->model->getDuration($this);
     }
 
     public function onEntityStatGet(ActionEntityStatGet $action) {
-        $this->model->onEntityStatGet($action, $this->bearer, $this->origin, $this->data);
+        $this->model->onEntityStatGet($action, $this);
     }
 
     public function onEntityAttack(ActionEntityAttack $action) {
-        $this->model->onEntityAttack($action, $this->bearer, $this->origin, $this->data);
+        $this->model->onEntityAttack($action, $this);
     }
 
     public function onEntityUseAbility(ActionEntityUseAbility $action) {
-        $this->model->onEntityUseAbility($action, $this->bearer, $this->origin, $this->data);
+        $this->model->onEntityUseAbility($action, $this);
     }
 
     public function onEntityDamage(ActionEntityDamage $action) {
-        $this->model->onEntityDamage($action, $this->bearer, $this->origin, $this->data);
+        $this->model->onEntityDamage($action, $this);
     }
 
     public function onEntityHeal(ActionEntityHeal $action) {
-        $this->model->onEntityHeal($action, $this->bearer, $this->origin, $this->data);
+        $this->model->onEntityHeal($action, $this);
     }
 
     public function onEntityAction(ActionEntityAction $action) {
-        $this->model->onEntityAction($action, $this->bearer, $this->origin, $this->data);
+        $this->model->onEntityAction($action, $this);
     }
 
     public static function createEffect(LivingEntity $origin, LivingEntity $bearer, EffectModel $model, $data) {
@@ -114,5 +118,21 @@ class Effect {
     public function getOrigin()
     {
         return $this->origin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBearer()
+    {
+        return $this->bearer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function &getData()
+    {
+        return $this->data;
     }
 }

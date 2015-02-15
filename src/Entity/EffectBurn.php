@@ -22,23 +22,29 @@ class EffectBurn extends EffectModel
         return 5;
     }
 
-    public function onEntityAction(ActionEntityAction $action, LivingEntity $bearer, LivingEntity $origin, &$data)
+    public function onEntityAction(ActionEntityAction $action, Effect $effect)
     {
-        if ($action->getOrigin() != $bearer) {
+        $data = &$effect->getData();
+
+        if ($action->getOrigin() != $effect->getBearer()) {
             return;
         }
 
         if ($action->getTime() == Action::AFTER) {
 
 
-            $origin->inflictDamage($bearer, 5);
+            $effect->getOrigin()->inflictDamage($effect->getBearer(), $this->getDamage());
 
             $data["actionDuration"] -= 1;
+
+            if ($data["actionDuration"] == 0) {
+                $this->remove($effect);
+            }
         }
     }
 
-    public function getDuration(LivingEntity $bearer, LivingEntity $origin, $data)
+    public function getDuration(Effect $effect)
     {
-        return $data["actionDuration"] . " actions";
+        return $effect->getData()["actionDuration"] . " actions";
     }
 }

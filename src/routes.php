@@ -257,11 +257,16 @@ function processAction(Adventure $adventure, $user, $action) {
                 // Commands for those who are in the adventure
                 if ($actionName == "attack") {
 
+                    $target = null;
+
                     if (is_numeric($actionArgs[0])) {
                         $target = Monster::getMonster($actionArgs[0]);
                     } else {
                         $targetCharacter = Character::getCharacterByName($actionArgs[0]);
-                        $target = AdventureCharacter::getAdventureCharacter($targetCharacter, $adventure);
+
+                        if ($targetCharacter != null) {
+                            $target = AdventureCharacter::getAdventureCharacter($targetCharacter, $adventure);
+                        }
                     }
 
 

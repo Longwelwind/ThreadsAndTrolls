@@ -50,6 +50,10 @@ class AbilityFireball extends Ability {
         }
 
 
+        if ($target == null) {
+            return false;
+        }
+
         return array($target);
     }
 

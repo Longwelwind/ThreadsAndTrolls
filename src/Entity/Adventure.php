@@ -102,6 +102,10 @@ class Adventure implements ActionListener {
         foreach ($this->getCharacters() as $character) {
             $character->onEntityStatGet($action);
         }
+
+        foreach ($this->getMonsters() as $livingEntity) {
+            $livingEntity->onEntityStatGet($action);
+        }
     }
 
     public function onEntityAttack(ActionEntityAttack $action) {
@@ -109,6 +113,10 @@ class Adventure implements ActionListener {
 
         foreach ($this->getCharacters() as $character) {
             $character->onEntityAttack($action);
+        }
+
+        foreach ($this->getMonsters() as $livingEntity) {
+            $livingEntity->onEntityAttack($action);
         }
     }
 
@@ -118,11 +126,19 @@ class Adventure implements ActionListener {
         foreach ($this->getCharacters() as $character) {
             $character->onEntityAttack($action);
         }
+
+        foreach ($this->getMonsters() as $livingEntity) {
+            $livingEntity->onEntityUseAbility($action);
+        }
     }
 
     public function onEntityDamage(ActionEntityDamage $action) {
         foreach ($this->getCharacters() as $character) {
             $character->onEntityDamage($action);
+        }
+
+        foreach ($this->getMonsters() as $livingEntity) {
+            $livingEntity->onEntityDamage($action);
         }
     }
 
@@ -130,11 +146,19 @@ class Adventure implements ActionListener {
         foreach ($this->getCharacters() as $character) {
             $character->onEntityAttack($action);
         }
+
+        foreach ($this->getMonsters() as $livingEntity) {
+            $livingEntity->onEntityHeal($action);
+        }
     }
 
     public function onEntityAction(ActionEntityAction $action) {
         foreach ($this->getCharacters() as $character) {
             $character->onEntityAction($action);
+        }
+
+        foreach ($this->getMonsters() as $livingEntity) {
+            $livingEntity->onEntityAction($action);
         }
     }
 

@@ -39,11 +39,9 @@ class AbilityHeal extends Ability {
             $target = AdventureCharacter::getAdventureCharacter($targetCharacter, $adventure);
         }
 
-
-
-
-
-
+        if ($target == null) {
+            return false;
+        }
 
         return array($target);
     }

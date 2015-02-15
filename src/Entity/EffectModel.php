@@ -36,23 +36,27 @@ abstract class EffectModel {
      */
     private $icon;
 
-    abstract function getDuration(LivingEntity $bearer, LivingEntity $origin, $data);
+    abstract function getDuration(Effect $effect);
+
+    public function remove(Effect $effect) {
+        $effect->remove();
+    }
 
     /*
      * All those events can be overriden by a child object
      */
 
-    public function onEntityStatGet(ActionEntityAction $action, LivingEntity $bearer, LivingEntity $origin, &$data) { }
+    public function onEntityStatGet(ActionEntityAction $action, Effect $effect) { }
 
-    public function onEntityAttack(ActionEntityAttack $action, LivingEntity $bearer, LivingEntity $origin, &$data) { }
+    public function onEntityAttack(ActionEntityAttack $action, Effect $effect) { }
 
-    public function onEntityUseAbility(ActionEntityAction $action, LivingEntity $bearer, LivingEntity $origin, &$data) { }
+    public function onEntityUseAbility(ActionEntityAction $action, Effect $effect) { }
 
-    public function onEntityDamage(ActionEntityAction $action, LivingEntity $bearer, LivingEntity $origin, &$data) { }
+    public function onEntityDamage(ActionEntityAction $action, Effect $effect) { }
 
-    public function onEntityHeal(ActionEntityAction $action, LivingEntity $bearer, LivingEntity $origin, &$data) { }
+    public function onEntityHeal(ActionEntityAction $action, Effect $effect) { }
 
-    public function onEntityAction(ActionEntityAction $action, LivingEntity $bearer, LivingEntity $origin, &$data) { }
+    public function onEntityAction(ActionEntityAction $action, Effect $effect) { }
 
     /*
      * End of events
