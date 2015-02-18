@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Event;
 use ThreadsAndTrolls\Database;
 
 /**
@@ -11,12 +11,12 @@ use ThreadsAndTrolls\Database;
 class EventCharacterUseAbility extends Event {
 
     /**
-     * @OneToOne(targetEntity="Ability")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Ability")
      */
     private $ability;
 
     /**
-     * @OneToOne(targetEntity="AdventureCharacter")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\AdventureCharacter")
      * @JoinColumn(name="adventure_character_id")
      */
     private $adventureCharacter;
@@ -31,7 +31,7 @@ class EventCharacterUseAbility extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/character_use_ability.php");
+        include(self::getViewsPath() . "character_use_ability.php");
     }
 
     public static function createEventCharacterUseAbility($adventure, $adventureCharacter, $ability) {

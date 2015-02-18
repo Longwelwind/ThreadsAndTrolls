@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Event;
 use ThreadsAndTrolls\Database;
 
 /**
@@ -11,13 +11,13 @@ use ThreadsAndTrolls\Database;
 class EventStatisticTest extends Event {
 
     /**
-     * @OneToOne(targetEntity="AdventureCharacter")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\AdventureCharacter")
      * @JoinColumn(name="adventure_character_id")
      */
     private $adventureCharacter;
 
     /**
-     * @OneToOne(targetEntity="Statistic")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Statistic")
      */
     private $statistic;
 
@@ -76,7 +76,7 @@ class EventStatisticTest extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/statistic_test.php");
+        include(self::getViewsPath() . "/../../views/event/statistic_test.php");
     }
 
     public function isSuccessful() {

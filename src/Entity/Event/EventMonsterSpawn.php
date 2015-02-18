@@ -1,8 +1,10 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Event;
 use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Entity\Adventure;
+use ThreadsAndTrolls\Entity\Monster;
 
 /**
  * @Entity
@@ -12,7 +14,7 @@ class EventMonsterSpawn extends Event {
 
 
     /**
-     * @OneToOne(targetEntity="Monster")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Monster")
      */
     private $monster;
 
@@ -24,7 +26,7 @@ class EventMonsterSpawn extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/monster_spawn.php");
+        include(self::getViewsPath() . "/../../views/event/monster_spawn.php");
     }
 
     public static function createMonsterSpawn(Adventure $adventure, Monster $monster)

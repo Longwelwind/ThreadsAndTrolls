@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Event;
 
 /**
  * @Entity
@@ -19,7 +19,7 @@ class Event {
     private $id;
 
     /**
-     * @ManyToOne(targetEntity="Adventure", inversedBy="events")
+     * @ManyToOne(targetEntity="ThreadsAndTrolls\Entity\Adventure", inversedBy="events")
      */
     private $adventure;
 
@@ -34,6 +34,11 @@ class Event {
     public function getId()
     {
         return $this->id;
+    }
+
+    static function getViewsPath()
+    {
+        return __DIR__ . "/../../../views/event/";
     }
 
 

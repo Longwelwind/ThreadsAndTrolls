@@ -1,8 +1,9 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Event;
 use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Entity\Adventure;
 
 /**
  * @Entity
@@ -11,7 +12,7 @@ use ThreadsAndTrolls\Database;
 class EventJoin extends Event {
 
     /**
-     * @OneToOne(targetEntity="Character")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Character")
      */
     private $character;
 
@@ -22,7 +23,7 @@ class EventJoin extends Event {
     }
 
     public function displayRow() {
-        include(__DIR__ . "/../../views/event/join.php");
+        include(self::getViewsPath() . "/../../views/event/join.php");
     }
 
     public static function createEventJoin(Adventure $adventure, $character)

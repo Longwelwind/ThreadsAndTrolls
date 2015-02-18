@@ -11,6 +11,9 @@ use ThreadsAndTrolls\Action\ActionEntityDamage;
 use ThreadsAndTrolls\Action\ActionEntityHeal;
 use ThreadsAndTrolls\Action\ActionEntityStatGet;
 use ThreadsAndTrolls\Action\ActionEntityUseAbility;
+use ThreadsAndTrolls\Entity\Event\EventEntityAttack;
+use ThreadsAndTrolls\Entity\Event\EventEntityHealDamage;
+use ThreadsAndTrolls\Entity\Event\EventEntityInflictDamage;
 
 /**
  * @Entity

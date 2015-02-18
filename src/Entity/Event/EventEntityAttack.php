@@ -1,8 +1,10 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Event;
 use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Entity\Adventure;
+use ThreadsAndTrolls\Entity\LivingEntity;
 
 /**
  * @Entity
@@ -11,13 +13,13 @@ use ThreadsAndTrolls\Database;
 class EventEntityAttack extends Event {
 
     /**
-     * @OneToOne(targetEntity="LivingEntity")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\LivingEntity")
      * @JoinColumn(name="attacker_living_entity_id")
      */
     private $attacker;
 
     /**
-     * @OneToOne(targetEntity="LivingEntity")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\LivingEntity")
      * @JoinColumn(name="target_living_entity_id")
      */
     private $target;
@@ -31,7 +33,7 @@ class EventEntityAttack extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/entity_attack.php");
+        include(self::getViewsPath() . "/../../views/event/entity_attack.php");
     }
 
     public static function createEventEntityAttack(Adventure $adventure, LivingEntity $attacker, LivingEntity $target)

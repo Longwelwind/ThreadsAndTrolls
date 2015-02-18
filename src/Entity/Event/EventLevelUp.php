@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Event;
 use ThreadsAndTrolls\Database;
 
 /**
@@ -11,7 +11,7 @@ use ThreadsAndTrolls\Database;
 class EventLevelUp extends Event {
 
     /**
-     * @OneToOne(targetEntity="Character")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Character")
      */
     private $character;
 
@@ -41,7 +41,7 @@ class EventLevelUp extends Event {
 
     public function displayRow() {
 
-        include(__DIR__ . "/../../views/event/level_up.php");
+        include(self::getViewsPath() . "/../../views/event/level_up.php");
     }
 
     /**

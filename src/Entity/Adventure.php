@@ -63,7 +63,7 @@ class Adventure implements ActionListener {
     private $lastTreatedMessage;
 
     /**
-     * @OneToMany(targetEntity="Event", mappedBy="adventure")
+     * @OneToMany(targetEntity="ThreadsAndTrolls\Entity\Event\Event", mappedBy="adventure")
      * @OrderBy({"id" = "ASC"})
      */
     private $events;
