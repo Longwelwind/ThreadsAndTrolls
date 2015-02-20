@@ -4,7 +4,10 @@
 namespace ThreadsAndTrolls\Entity\Ability;
 use ThreadsAndTrolls\Entity\Adventure;
 use ThreadsAndTrolls\Entity\AdventureCharacter;
+use ThreadsAndTrolls\Entity\Character;
 use ThreadsAndTrolls\Entity\EffectModel\EffectModel;
+use ThreadsAndTrolls\Entity\Monster;
+use ThreadsAndTrolls\Entity\Statistic;
 
 /**
  * @Entity

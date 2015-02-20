@@ -5,6 +5,7 @@ namespace ThreadsAndTrolls\Entity\Ability;
 use ThreadsAndTrolls\Database;
 use ThreadsAndTrolls\Entity\Adventure;
 use ThreadsAndTrolls\Entity\AdventureCharacter;
+use ThreadsAndTrolls\Entity\Character;
 
 /**
  * @Entity

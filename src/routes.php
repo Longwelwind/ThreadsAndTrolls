@@ -14,7 +14,7 @@ use ThreadsAndTrolls\Entity\Monster;
 use ThreadsAndTrolls\Entity\MonsterModel;
 use ThreadsAndTrolls\Entity\Profession;
 use ThreadsAndTrolls\Entity\Race;
-use ThreadsAndTrolls\Entity\Ability;
+use ThreadsAndTrolls\Entity\Ability\Ability;
 use ThreadsAndTrolls\Entity\Statistic;
 use ThreadsAndTrolls\MessageLoader\JolMessageLoader;
 
