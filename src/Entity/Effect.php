@@ -3,7 +3,6 @@
 
 namespace ThreadsAndTrolls\Entity;
 
-
 use ThreadsAndTrolls\Action\ActionEntityAction;
 use ThreadsAndTrolls\Action\ActionEntityAttack;
 use ThreadsAndTrolls\Action\ActionEntityDamage;
@@ -11,6 +10,7 @@ use ThreadsAndTrolls\Action\ActionEntityHeal;
 use ThreadsAndTrolls\Action\ActionEntityStatGet;
 use ThreadsAndTrolls\Action\ActionEntityUseAbility;
 use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Entity\EffectModel\EffectModel;
 
 /**
  * @Entity
@@ -38,7 +38,7 @@ class Effect {
     private $origin;
 
     /**
-     * @OneToOne(targetEntity="EffectModel")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\EffectModel\EffectModel")
      * @JoinColumn(name="effect_model_id")
      */
     private $model;

@@ -4,6 +4,7 @@
 namespace ThreadsAndTrolls\Entity;
 use ThreadsAndTrolls\Database;
 use ThreadsAndTrolls\DiceRoll;
+use ThreadsAndTrolls\Entity\Ability\Ability;
 use ThreadsAndTrolls\Entity\Event\EventCharacterUseAbility;
 use ThreadsAndTrolls\Entity\Event\EventStatisticTest;
 

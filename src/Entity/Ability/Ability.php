@@ -1,8 +1,10 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Ability;
 use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Entity\Adventure;
+use ThreadsAndTrolls\Entity\AdventureCharacter;
 
 /**
  * @Entity
@@ -41,7 +43,7 @@ abstract class Ability {
     abstract public function getDescription(Character $adventureCharacter);
 
     public static function getAbilityByTag($tag) {
-        return Database::getRepository("ThreadsAndTrolls\\Entity\\Ability")
+        return Database::getRepository(self::class)
             ->findOneBy(array("tag" => $tag));
     }
 

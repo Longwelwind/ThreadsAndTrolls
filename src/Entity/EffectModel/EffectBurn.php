@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: justice
- * Date: 01.02.15
- * Time: 15:49
- */
-
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\EffectModel;
 
 use ThreadsAndTrolls\Action\Action;
 use ThreadsAndTrolls\Action\ActionEntityAction;
+use ThreadsAndTrolls\Entity\Effect;
 
 /**
  * @Entity

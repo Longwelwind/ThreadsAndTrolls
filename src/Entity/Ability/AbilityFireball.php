@@ -1,7 +1,10 @@
 <?php
 
 
-namespace ThreadsAndTrolls\Entity;
+namespace ThreadsAndTrolls\Entity\Ability;
+use ThreadsAndTrolls\Entity\Adventure;
+use ThreadsAndTrolls\Entity\AdventureCharacter;
+use ThreadsAndTrolls\Entity\EffectModel\EffectModel;
 
 /**
  * @Entity

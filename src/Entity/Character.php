@@ -5,6 +5,7 @@ namespace ThreadsAndTrolls\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Entity\Ability\Ability;
 
 /**
  * @Entity
@@ -69,7 +70,7 @@ class Character {
     private $profession;
 
     /**
-     * @ManyToMany(targetEntity="Ability")
+     * @ManyToMany(targetEntity="ThreadsAndTrolls\Entity\Ability\Ability")
      * @JoinTable(name="character_ability",
      *      joinColumns={@JoinColumn(name="character_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="ability_id", referencedColumnName="id")}
@@ -219,16 +220,16 @@ class Character {
     }
 
     public static function getCharacter($id) {
-        return Database::getEntityManager()->find("ThreadsAndTrolls\\Entity\\Character", $id);
+        return Database::getEntityManager()->find(self::class, $id);
     }
 
     public static function getCharacterByOwner($owner) {
-        return Database::getEntityManager()->getRepository("ThreadsAndTrolls\\Entity\\Character")
+        return Database::getEntityManager()->getRepository(self::class)
             ->findOneBy(array("owner" => $owner));
     }
 
     public static function getCharacterByName($name) {
-        return Database::getEntityManager()->getRepository("ThreadsAndTrolls\\Entity\\Character")
+        return Database::getEntityManager()->getRepository(self::class)
             ->findOneBy(array("name" => $name));
     }
 

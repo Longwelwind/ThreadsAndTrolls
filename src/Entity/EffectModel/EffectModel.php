@@ -1,10 +1,11 @@
 <?php
 
+namespace ThreadsAndTrolls\Entity\EffectModel;
 
-namespace ThreadsAndTrolls\Entity;
 use ThreadsAndTrolls\Action\ActionEntityAction;
 use ThreadsAndTrolls\Action\ActionEntityAttack;
 use ThreadsAndTrolls\Database;
+use ThreadsAndTrolls\Entity\Effect;
 
 /**
  * @Entity

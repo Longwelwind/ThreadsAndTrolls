@@ -11,7 +11,7 @@ use ThreadsAndTrolls\Database;
 class EventCharacterUseAbility extends Event {
 
     /**
-     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Ability")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Ability\Ability")
      */
     private $ability;
 

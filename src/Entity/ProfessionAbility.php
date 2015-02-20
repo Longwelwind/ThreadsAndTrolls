@@ -18,7 +18,7 @@ class ProfessionAbility {
 
     /**
      * @Id
-     * @OneToOne(targetEntity="Ability")
+     * @OneToOne(targetEntity="ThreadsAndTrolls\Entity\Ability\Ability")
      */
     private $ability;
 
