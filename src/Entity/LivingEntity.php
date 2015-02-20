@@ -13,8 +13,10 @@ use ThreadsAndTrolls\Action\ActionEntityStatGet;
 use ThreadsAndTrolls\Action\ActionEntityUseAbility;
 use ThreadsAndTrolls\Entity\EffectModel\EffectModel;
 use ThreadsAndTrolls\Entity\Event\EventEntityAttack;
+use ThreadsAndTrolls\Entity\Event\EventEntityFinishEffect;
 use ThreadsAndTrolls\Entity\Event\EventEntityHealDamage;
 use ThreadsAndTrolls\Entity\Event\EventEntityInflictDamage;
+use ThreadsAndTrolls\Entity\Event\EventEntitySufferEffect;
 
 /**
  * @Entity
@@ -90,10 +92,14 @@ abstract class LivingEntity {
 
         $this->effects->add($effect);
 
+        EventEntitySufferEffect::createEventEntitySufferEffect($this->getAdventure(), $this, $effect);
+
         return $effect;
     }
 
     public function removeEffect(Effect $effect) {
+
+        EventEntityFinishEffect::createEventEntityFinishEffect($this->getAdventure(), $this, $effect);
         return $this->effects->removeElement($effect);
     }
 
