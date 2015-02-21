@@ -74,10 +74,23 @@ class Adventure implements ActionListener {
         $this->events = new ArrayCollection();
     }
 
+    /**
+     * Returns the specified Adventure from $type and $code
+     * @param $type Type of the adventure
+     * @param $code Code of the adventure
+     * @return Adventure|null The specified adventure, null if not found.
+     */
     public static function getGame($type, $code) {
-        return Database::getEntityManager()->getRepository("ThreadsAndTrolls\\Entity\\Adventure")->findOneBy(array("threadCode" => $code, "threadType" => $type));
+        return Database::getEntityManager()->getRepository(self::class)->findOneBy(array("threadCode" => $code, "threadType" => $type));
     }
 
+    /**
+     * Create an adventure
+     * @param $master Name of the master of the adventure
+     * @param $type Type of the adventure
+     * @param $code Code of the adventure
+     * @return Adventure The created adventure
+     */
     public static function createGame($master, $type, $code) {
 
         $adventure = new Adventure();
@@ -163,7 +176,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -171,7 +184,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return Characters[]
      */
     public function getCharacters()
     {
@@ -179,15 +192,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @param mixed $characters
-     */
-    public function setCharacters($characters)
-    {
-        $this->characters = $characters;
-    }
-
-    /**
-     * @return mixed
+     * @return boolean
      */
     public function getFinished()
     {
@@ -195,7 +200,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @param mixed $finished
+     * @param boolean $finished
      */
     public function setFinished($finished)
     {
@@ -203,7 +208,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getLastTreatedMessage()
     {
@@ -211,7 +216,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @param mixed $lastTreatedMessage
+     * @param int $lastTreatedMessage
      */
     public function setLastTreatedMessage($lastTreatedMessage)
     {
@@ -220,7 +225,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getMaster()
     {
@@ -228,7 +233,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @param mixed $master
+     * @param string $master
      */
     public function setMaster($master)
     {
@@ -236,7 +241,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getThreadCode()
     {
@@ -244,7 +249,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @param mixed $threadCode
+     * @param string $threadCode
      */
     public function setThreadCode($threadCode)
     {
@@ -252,7 +257,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getThreadType()
     {
@@ -260,7 +265,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @param mixed $threadType
+     * @param string $threadType
      */
     public function setThreadType($threadType)
     {
@@ -268,7 +273,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return Monster[]
      */
     public function getMonsters()
     {
@@ -276,7 +281,7 @@ class Adventure implements ActionListener {
     }
 
     /**
-     * @return mixed
+     * @return Event[]
      */
     public function getEvents()
     {
