@@ -4,7 +4,7 @@
 namespace ThreadsAndTrolls\MessageLoader;
 
 
-class JolMessageLoader {
+class JolMessageLoader implements MessageLoader {
     private $threadId;
 
     public function __construct($threadId) {
@@ -15,7 +15,7 @@ class JolMessageLoader {
         $url = "http://flux.jeuxonline.info/fil-" . $this->threadId . "-50.rss";
 
         $rssRaw = file_get_contents($url);
-        //$rssRaw = file_get_contents(__DIR__ . "/test.xml"); // Fake RSS input for testing
+        //$rssRaw = file_get_contents(__DIR__ . "/../test.xml"); // Fake RSS input for testing
 
         $messages = array();
 
